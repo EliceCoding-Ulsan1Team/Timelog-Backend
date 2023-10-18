@@ -11,10 +11,10 @@ const cluster = "cluster-test-001";
 const dbName = "timelogDB";
 const url = `mongodb+srv://${username}:${password}@${cluster}.eahmjck.mongodb.net/${dbName}`;
 const client = new MongoClient(url);
-let db;
 
 // db 연결
 async function connectDB() {
+  let db;
   try {
     await client.connect();
     console.log(
@@ -22,6 +22,10 @@ async function connectDB() {
     );
 
     db = client.db();
+
+    // mongsh에서 db.runCommand({ ping: 1 }) 실행한 것과 같은 기능 수행
+    const pingResult = await db.command({ ping: 1 });
+    console.log(`${PRE_MSG} mongoDB 연결상태: ${JSON.stringify(pingResult)}`);
   } catch (err) {
     console.error(`${PRE_MSG} mongoDB에 연결할 수 없습니다.`, err);
   } finally {

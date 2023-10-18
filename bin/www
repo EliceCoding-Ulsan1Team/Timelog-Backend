@@ -8,7 +8,6 @@ var app = require("../app");
 var debug = require("debug")("timelog-backend:server");
 var http = require("http");
 
-const connectDB = require("../database/dbcon");
 /**
  * Get port from environment and store in Express.
  */

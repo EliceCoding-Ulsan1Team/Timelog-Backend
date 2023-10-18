@@ -1,22 +1,17 @@
-// 컬렉션 이름과 데이터를 받아서 해당 컬렉션에 데이터를 집어넣어주는 역할
+/* 컬렉션 이름과 데이터를 받아서 해당 컬렉션에 데이터를 집어넣어주는 역할
+by aain */
 const { connectDB } = require("./dbcon");
-const PRE_MSG = "<insertData.js>";
+const PRE_MSG = "<createData.js>";
 
-async function insertData(collectionName, data) {
-  console.log(`${PRE_MSG} dbcon.js를 불러들입니다.`);
+async function createData(collectionName, data) {
+  console.log(`${PRE_MSG} dbcon.js를 실행합니다.`);
   const db = await connectDB();
-  console.dir(db);
-
-  // mongsh에서 db.runCommand({ ping: 1 }) 실행한 것과 같은 기능 수행
-  const pingResult = await db.command({ ping: 1 });
-  console.log(`${PRE_MSG} mongoDB 연결상태: ${JSON.stringify(pingResult)}`);
 
   if (db) {
     try {
       const collection = db.collection(collectionName);
 
       const result = await collection.insertOne(data);
-      // console.dir(result);
 
       if (result.acknowledged) {
         console.log(
@@ -33,4 +28,4 @@ async function insertData(collectionName, data) {
   }
 }
 
-module.exports = { insertData };
+module.exports = { createData };
