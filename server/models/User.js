@@ -31,6 +31,10 @@ const userSchema = mongoose.Schema({
     //     maxlength:50
     // },
     // image: String,
+    mobile :{
+      type: String,
+      maxlength: 30
+    },
     token: {
         type: String,
       },

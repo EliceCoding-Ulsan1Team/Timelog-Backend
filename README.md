@@ -3,6 +3,10 @@ https://www.inflearn.com/course/lecture?courseSlug=%EB%94%B0%EB%9D%BC%ED%95%98%E
 
 새롭게 만드는 중
 
+npm run backend -> 서버실행
+
+
+[server] backend
 1.
 2.
 3. 몽고DB 연결
@@ -21,4 +25,11 @@ https://www.inflearn.com/course/lecture?courseSlug=%EB%94%B0%EB%9D%BC%ED%95%98%E
 12. Auth 기능 만들기
 13. 로그아웃 기능
 
+231019
+전화번호 추가
+내정보 api / 수정api (이름,이메일,전화번호)
 
+--------------
+[client] react
+port 3000
+npm run start

@@ -4,7 +4,7 @@ const express = require("express");
 const dotenv = require("dotenv");  //몽고디비 id,비번 보안(FU) .gitignore
 dotenv.config();
 const app = express();
-const port = 3020; //기존5000번 포트 -> 3010로 수정(FU) / backend port
+const port = 3020; //backend port
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -97,6 +97,7 @@ app.post('/api/users/login', (req, res) => {
       // role 0 -> 일반유저 role 0이 아니면 관리자
       name: req.user.name,
       email: req.user.email,
+      mobile: req.user.mobile,
     //   lastname: req.user.lastname,
     //   role: req.user.role,
     //   image: req.user.image,
@@ -104,15 +105,6 @@ app.post('/api/users/login', (req, res) => {
   });
 
 // 로그 아웃
-// app.get("/api/users/logout", auth, (req, res) => {
-//     User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, user) => {
-//       if (err) return res.json({ success: false, err });
-//       return res.status(200).send({
-//         success: true,
-//       });
-//     });
-//   });
-
 //gpt 6.0 callback 지원x(231019)
 app.get("/api/users/logout", auth, (req, res) => {
     User.findOneAndUpdateWithToken(req.user._id, req.token)
@@ -135,10 +127,33 @@ app.get("/api/users/logout", auth, (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      mobile: user.mobile // 전화번호 추가(23.10.19)
       // 추가 필드에 따라 프로필 정보를 확장할 수 있습니다.
     });
   });
   
-
+  //내 정보 수정 api
+  // 
+  app.post("/api/users/updateprofile", auth, async (req, res) => {
+    try {
+      // 수정된 정보를 가져와서 사용자 정보 업데이트
+      const user = req.user; // 이미 auth 미들웨어에서 유저 정보를 가져왔으므로 사용 가능
+      user.name = req.body.name; // 이름 수정
+      user.email = req.body.email; // 이메일 수정
+      user.mobile = req.body.mobile;  //전화번호 수정
+  
+      // 수정된 정보 저장
+      const updatedUser = await user.save();
+  
+      res.status(200).json({
+        name: updatedUser.name,
+        email: updatedUser.email,
+        mobile: updatedUser.mobile
+        // 추가 필드에 따라 응답을 확장할 수 있습니다.
+      });
+    } catch (err) {
+      return res.status(400).send(err);
+    }
+  });
 
 app.listen(port, () => console.log(`example port ${port}`));
