@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 
-//몽고db 연결이 안됨 (그전 파일에서 사용중이라 그런것같다)(23.10.19)
+//몽고db 연결(23.10.19)
 mongoose
 .connect(`mongodb+srv://${process.env.DB_username}:${process.env.DB_password}@fu.jfjaess.mongodb.net/Fu`, {
   useNewUrlParser: true, 
@@ -126,17 +126,19 @@ app.get("/api/users/logout", auth, (req, res) => {
       });
   });
   
-
-// 내정보 (구현x 231019)
-//   app.get("/api/infos", function (req, res) {
-//     User.find({}).exec(function (err, users) {
-//       if (err) {
-//         console.log(err);
-//       } else {
-//         res.json(users);
-//       }
-//     });
-//   });
+//내 정보 api
+  app.get("/api/users/myprofile", auth, (req, res) => {
+    // 인증된 사용자의 프로필 정보를 가져오는 코드를 작성합니다.
+    const user = req.user; // 이미 auth 미들웨어에서 유저 정보를 가져왔으므로 사용 가능
+  
+    res.status(200).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      // 추가 필드에 따라 프로필 정보를 확장할 수 있습니다.
+    });
+  });
+  
 
 
 app.listen(port, () => console.log(`example port ${port}`));
