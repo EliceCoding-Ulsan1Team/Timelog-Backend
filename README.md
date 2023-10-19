@@ -15,3 +15,10 @@ https://www.inflearn.com/course/lecture?courseSlug=%EB%94%B0%EB%9D%BC%ED%95%98%E
 7. bodyparser and postman
 8. nodemon
 8. dotenv (이미 작업함) -> 방법이 좀다름
+9. Bcrypt 암호화 -> 두번째 등록부터 false 처리됨(해겵x 231019)
+10. 로그인기능 with Bcrypt
+11. 토큰 생성 with jsonwebtoken
+12. Auth 기능 만들기
+13. 로그아웃 기능
+
+
