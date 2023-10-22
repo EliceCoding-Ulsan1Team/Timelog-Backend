@@ -7,10 +7,10 @@ const dateFormatter = require("../controller/dateFormatter");
 const PRE_MSG = "<profile.js>";
 
 /* GET myinfo page. */
-router.get("/", async (req, res) => {
-  console.log("profile 페이지 접속 완료");
-  res.end("profile 페이지 접속 완료");
-});
+// router.get("/", async (req, res) => {
+//   console.log("profile 페이지 접속 완료");
+//   res.end("profile 페이지 접속 완료");
+// });
 
 router.get("/:userID", async (req, res) => {
   const userID = req.params.userID;

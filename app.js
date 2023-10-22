@@ -5,6 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 /* --라우터 by aain-- */
+const cors = require("cors");
 // 장면0-랜딩페이지, 경로명 : "/"
 var indexRouter = require("./routes/index");
 
@@ -33,6 +34,9 @@ const PRE_MSG = "<app.js>";
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+
+// 테스트를 위해 모든 오리진(원본)으로부터의 요청을 허용-프론트의 요청을 받기 위해 임시로 이렇게 둠. 프론트 배포 후 프론트 주소만 접근 허용해야 할 듯?
+app.use(cors());
 
 app.use(logger("dev"));
 app.use(express.json());
