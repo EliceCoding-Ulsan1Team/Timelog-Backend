@@ -9,12 +9,12 @@ var logger = require("morgan");
 var indexRouter = require("./routes/index");
 
 // 장면1.1-로그인 & 장면1.2-회원가입, 경로명 : "/login", "/sign"
-var usersRouter = require("./routes/users");
+var usersRouter = require("./routes/register");
 
-// 장면1.3-내 정보, 경로명: "/myinfo"
-const myinfoRouter = require("./routes/myinfo");
+// 장면1.3-내 정보, 경로명: "/profile"
+const profileRouter = require("./routes/profile");
 
-// 장면2-메인화면 경로명 : "/login", "/sign", "/myinfo"
+// 장면2-메인화면 경로명 : "/login", "/sign", "/profile"
 const mainRouter = require("./routes/main");
 
 // 장면3-설정화면, 경로명: "/setting"
@@ -32,7 +32,7 @@ const PRE_MSG = "<app.js>";
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
+app.set("view engine", "ejs");
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -45,8 +45,8 @@ app.use("/users", usersRouter);
 
 /* --by aain-- */
 /* <장면2-메인화면>에서 우측 상단 동그라미 user 버튼 클릭했을 때 
-    /myinfo (장면3-내 정보)로 넘어가는 라우팅 */
-app.use("/myinfo", myinfoRouter);
+    /profile (장면3-내 정보)로 넘어가는 라우팅 */
+app.use("/profile", profileRouter);
 /* --by aain-- */
 
 // catch 404 and forward to error handler

@@ -1,21 +1,30 @@
 /* --by aain-- */
 const express = require("express");
 const router = express.Router();
-const { readData } = require("../database/readData");
 
-const PRE_MSG = "<myinfo.js>";
+const { readData } = require("../database/readData");
+const dateFormatter = require("../controller/dateFormatter");
+const PRE_MSG = "<profile.js>";
 
 /* GET myinfo page. */
+router.get("/", async (req, res) => {
+  console.log("profile 페이지 접속 완료");
+  res.end("profile 페이지 접속 완료");
+});
+
 router.get("/:userID", async (req, res) => {
   const userID = req.params.userID;
   const collectionName = "users";
 
   try {
     const userData = await readData(collectionName, userID);
-
     if (userData) {
+      console.log(userData.signDate);
+      userData.signDate = dateFormatter(userData.signDate);
       // 프론트로 데이터를 넘겨주는 부분!
       res.json(userData);
+      // res.render("profile", { userData });
+
       /* Node.js 또는 Express.js의 메소드. 'userData'라는 js객체를 json형식으로 직렬화하여 클라이언트에게 반환함.
       
       리액트(클라이언트측)에서 사용하는 res.json()은 'fetch' API나 다른 HTTP 클라이언트 라이브러리에서 제공하는 메서드.

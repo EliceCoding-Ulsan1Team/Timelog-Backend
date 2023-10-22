@@ -1,4 +1,4 @@
-const { createData } = require("./createData");
+const { createData } = require("../database/createData");
 
 // 회원가입 컬렉션 'users'
 const collectionName = "users";

@@ -1,10 +1,10 @@
 // 데이터 CRUD 테스트용 파일.
 
 // 데이터 CRUD 컴포넌트들  불러오기
-const { createData } = require("./createData");
-const { readData } = require("./readData");
-const { updateData } = require("./updateData");
-const { deleteData } = require("./deleteData");
+const { createData } = require("../database/createData");
+const { readData } = require("../database/readData");
+const { updateData } = require("../database/updateData");
+const { deleteData } = require("../database/deleteData");
 
 const collectionName = "users";
 
