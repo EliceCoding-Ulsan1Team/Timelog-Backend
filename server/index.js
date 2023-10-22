@@ -19,26 +19,14 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 
-//몽고db 연결(23.10.19)
-// mongoose
-//   .connect(`mongodb+srv://${process.env.DBuser}:${process.env.DBpsword}@fu.jfjaess.mongodb.net/Fu`, {
-//     useNewUrlParser: true,
-//     //   useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false,
-//   })
-//   .then(() => console.log('Connected to MongoDB!!')) //몽고DB 접속 성공시 
-//   .catch((err) => console.log(err));
-
-
-  //test mongoDB 연결code(231020) - 최종작업후 지욼것
+// 몽고db 연결(23.10.19)
 mongoose
-  .connect(`mongodb+srv://onigiri282:ro4rKj0GXvXyqc5u@fu.jfjaess.mongodb.net/Fu`, {
+  .connect(`mongodb+srv://${process.env.DBuser}:${process.env.DBpsword}@fu.jfjaess.mongodb.net/Fu`, {
     useNewUrlParser: true,
     //   useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false,
   })
   .then(() => console.log('Connected to MongoDB!!')) //몽고DB 접속 성공시 
   .catch((err) => console.log(err));
-
-
 
 
 
